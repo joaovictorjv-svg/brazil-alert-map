@@ -4,9 +4,12 @@ Dashboard executivo para monitorar backlog de OS por unidade, com mapa interativ
 
 ## Ponto de atenção: acesso à planilha
 
-O link enviado ainda não está acessível publicamente — ao tentar ler a planilha, o Google devolve uma página de login em vez dos dados. Antes (ou durante) a implementação, é preciso publicar a planilha em **Arquivo > Compartilhar > Publicar na web**, escolhendo a aba de dados e o formato **CSV**, e me enviar esse link `.../pub?gid=...&single=true&output=csv`.
+Testei o link `.../pub?output=csv` novamente: o Google responde **HTTP 401** com uma página de login, ou seja, a planilha ainda não está publicada para acesso anônimo. Provavelmente ela está apenas compartilhada dentro do domínio corporativo, ou a publicação na web está restrita.
 
-Enquanto isso não estiver disponível, construo tudo com dados de exemplo com a mesma estrutura de colunas, e a troca para o link real fica em um único ponto do código.
+Para liberar: abrir a planilha > **Arquivo > Compartilhar > Publicar na web** > selecionar a aba de dados > formato **Valores separados por vírgula (.csv)** > **Publicar**. Se a organização bloquear a publicação, uma alternativa é **Compartilhar > Qualquer pessoa com o link (Leitor)** e usar o endpoint `gviz/tq?tqx=out:csv`.
+
+Enquanto o acesso não estiver liberado, construo tudo com dados de exemplo na mesma estrutura de colunas; a troca para o link real fica em um único ponto do código.
+
 
 ## O que será construído
 
