@@ -2,13 +2,11 @@
 
 Dashboard executivo para monitorar backlog de OS por unidade, com mapa interativo do Brasil (Leaflet + GeoJSON) e dados vindos da planilha do Google.
 
-## Ponto de atenção: acesso à planilha
+## Acesso à planilha: OK
 
-Testei o link `.../pub?output=csv` novamente: o Google responde **HTTP 401** com uma página de login, ou seja, a planilha ainda não está publicada para acesso anônimo. Provavelmente ela está apenas compartilhada dentro do domínio corporativo, ou a publicação na web está restrita.
+O novo link responde **HTTP 200** e devolve o CSV completo — **53 unidades**, todas na Grande São Paulo/Baixada Santista. Colunas confirmadas: UNIDADE, GRUPO, QUADRO_FIXO, COORDENADAS, REQ_PARADAS, ABERTAS_UNIDADES, ABERTAS_VOLANTE, FECHADAS_VOLANTE, FECHADAS_UNIDADE, TOTAL_ABERTAS, TOTAL_FECHADAS, TOTAL_CHAMADOS, Backlog_Ativo (já vem em % no formato `28,57%`), CONDIÇÃO.
 
-Para liberar: abrir a planilha > **Arquivo > Compartilhar > Publicar na web** > selecionar a aba de dados > formato **Valores separados por vírgula (.csv)** > **Publicar**. Se a organização bloquear a publicação, uma alternativa é **Compartilhar > Qualquer pessoa com o link (Leitor)** e usar o endpoint `gviz/tq?tqx=out:csv`.
-
-Enquanto o acesso não estiver liberado, construo tudo com dados de exemplo na mesma estrutura de colunas; a troca para o link real fica em um único ponto do código.
+Grupos existentes: Hospitais, Nucleo, Pronto Atendimento e Backoffice e Galpões.
 
 
 ## O que será construído
