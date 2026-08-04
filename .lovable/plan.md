@@ -14,12 +14,13 @@ Grupos existentes: Hospitais, Nucleo, Pronto Atendimento e Backoffice e Galpões
 ### Mapa
 - Mapa do Brasil com Leaflet, camada base clara e contorno dos estados via GeoJSON.
 - Um pin por unidade, posicionado pela coluna COORDENADAS (lat, long).
-- Cor do pin pelo percentual de backlog: verde até 1%, amarelo de 2% a 19%, vermelho de 20% em diante.
+- Cor do pin pelo percentual da coluna Backlog_Ativo: verde até 1%, amarelo de 2% a 19%, vermelho de 20% em diante.
+- Enquadramento inicial automático nas unidades existentes (hoje, Grande São Paulo), com zoom out possível para o Brasil inteiro.
 - Agrupamento visual de pins muito próximos para não poluir o mapa.
 
 ### Modal de detalhes da unidade
 Ao clicar no pin, abre um painel com:
-- Nome da unidade e grupo/estado
+- Nome da unidade, grupo e condição
 - Total de chamados
 - Abertas (unidade, volante e total)
 - Fechadas (unidade, volante e total)
