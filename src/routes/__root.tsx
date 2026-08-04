@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Painel de Ordens de Serviço | Manutenção da Rede" },
+      { name: "description", content: "Dashboard executivo de ordens de serviço da manutenção: mapa interativo, backlog por unidade e alertas de criticidade em tempo quase real." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Painel de Ordens de Serviço | Manutenção da Rede" },
+      { property: "og:description", content: "Dashboard executivo de ordens de serviço da manutenção: mapa interativo, backlog por unidade e alertas de criticidade em tempo quase real." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Painel de Ordens de Serviço | Manutenção da Rede" },
+      { name: "twitter:description", content: "Dashboard executivo de ordens de serviço da manutenção: mapa interativo, backlog por unidade e alertas de criticidade em tempo quase real." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d81d7d53-3161-482f-a012-77c8191c68c9/id-preview-892f2736--e93208d9-40cb-4c2a-b142-2b521ca05221.lovable.app-1785862943541.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d81d7d53-3161-482f-a012-77c8191c68c9/id-preview-892f2736--e93208d9-40cb-4c2a-b142-2b521ca05221.lovable.app-1785862943541.png" },
     ],
     links: [
       {

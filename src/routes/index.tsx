@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Mapa interativo com backlog de OS por unidade, indicadores consolidados e filtros por grupo e criticidade.",
+          "Dashboard executivo de ordens de serviço da manutenção: mapa interativo, backlog por unidade e alertas de criticidade em tempo quase real.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
