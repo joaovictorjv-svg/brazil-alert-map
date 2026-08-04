@@ -33,7 +33,7 @@ Ao clicar no pin, abre um painel com:
 - Botão "Atualizar dados" com indicador de carregamento e horário da última sincronização.
 
 ### Filtros
-- Filtro por estado/grupo.
+- Filtro por grupo (Hospitais, Nucleo, Pronto Atendimento, Backoffice e Galpões).
 - Filtro por criticidade (verde / amarelo / vermelho).
 - Busca por nome de unidade.
 - Lista lateral das unidades filtradas, clicável, sincronizada com o mapa.
