@@ -39,7 +39,7 @@ Ao clicar no pin, abre um painel com:
 - Lista lateral das unidades filtradas, clicável, sincronizada com o mapa.
 
 ### Dados e cache
-- Leitura do CSV publicado feita no servidor (evita bloqueio de CORS), com parsing das colunas: UNIDADE, GRUPO, COORDENADAS, REQ_PARADAS, ABERTAS_UNIDADE, ABERTAS_VOLANTE, FECHADAS_VOLANTE, FECHADAS_UNIDADE, TOTAL_ABERTAS, TOTAL_FECHADAS, TOTAL_CHAMADOS, BACKLOG_ATIVOS.
+- Leitura do CSV publicado feita no servidor (evita bloqueio de CORS), com parser que respeita campos entre aspas (nomes de unidade e coordenadas contêm vírgulas) e converte números/percentuais no padrão brasileiro.
 - Dados carregados no primeiro acesso e mantidos em cache na memória.
 - Revalidação automática em segundo plano a cada 10 minutos, mais o botão manual.
 - Linhas sem coordenada válida são ignoradas no mapa, mas contam nas estatísticas.
