@@ -51,7 +51,7 @@ Estilo corporativo e sóbrio (azul-petróleo profundo + cinzas neutros, tipograf
 
 - Rota única em `src/routes/index.tsx` (substitui o placeholder), com `head()` próprio para SEO.
 - `src/lib/os-data.functions.ts`: `createServerFn` que baixa o CSV, faz o parse e devolve DTOs simples (unidade, grupo, lat, lng, métricas, nível de alerta).
-- Cálculo do percentual de backlog: `BACKLOG_ATIVOS / TOTAL_CHAMADOS`; classificação em verde/amarelo/vermelho conforme os cortes acima.
+- Percentual de backlog lido da coluna `Backlog_Ativo` (`"28,57%"` → 28.57), com fallback para `TOTAL_ABERTAS / TOTAL_CHAMADOS` quando vazio; classificação em verde/amarelo/vermelho conforme os cortes acima.
 - TanStack Query com `staleTime` e `refetchInterval` de 10 min; `refetch()` no botão manual.
 - Leaflet carregado apenas no cliente (`React.lazy` + `ClientOnly`), com tipos e dados compartilhados em módulo separado para não quebrar o SSR.
 - GeoJSON dos estados brasileiros servido de `public/`.
