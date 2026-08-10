@@ -25,13 +25,13 @@ function FitBounds({ units, selected }: { units: OsUnit[]; selected: OsUnit | nu
   }, [map, selected]);
 
   useEffect(() => {
-    if (selected) return;
     const points = units
       .filter((u) => u.lat != null && u.lng != null)
       .map((u) => [u.lat as number, u.lng as number] as [number, number]);
     if (points.length === 0) return;
+
     map.fitBounds(L.latLngBounds(points).pad(0.25), { animate: false });
-  }, [map, units, selected]);
+  }, [map, units]); // 'selected' foi removido daqui
 
   return null;
 }
