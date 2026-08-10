@@ -29,7 +29,11 @@ async function loadSourceRows(): Promise<string[][]> {
       throw new Error("O arquivo XLSX não possui nenhuma aba.");
     }
     const sheet = workbook.Sheets[sheetName];
+    if (!sheet) {
+      throw new Error("Não foi possível ler a aba da planilha XLSX.");
+    }
     const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 }) as (string | number | null | undefined)[][];
+
     return rows.map((row) => row.map((cell) => (cell == null ? "" : String(cell))));
   }
 
