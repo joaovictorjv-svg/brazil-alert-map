@@ -1,7 +1,6 @@
 import { levelFromPct, type OsSnapshot, type OsUnit } from "./os-data";
+import csvText from "@/data/os-base.csv?raw";
 
-const CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5gh4Y_SvZl736qVZ7sFcJZThqSAge6yze05jmzEfdtpA3kDMu8Fkdv1alVghh_BTAe4stqOMADBqG/pub?output=csv";
 
 function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
