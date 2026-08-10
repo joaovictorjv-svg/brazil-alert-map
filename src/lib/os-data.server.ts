@@ -66,16 +66,11 @@ function parseCoords(raw: string | undefined): { lat: number | null; lng: number
 }
 
 export async function fetchOsSnapshot(): Promise<OsSnapshot> {
-  const response = await fetch(CSV_URL, { headers: { "cache-control": "no-cache" } });
-  if (!response.ok) {
-    throw new Error(
-      `Não foi possível ler a planilha (HTTP ${response.status}). Verifique a publicação do arquivo.`,
-    );
-  }
-  const rows = parseCsv(await response.text());
+  const rows = parseCsv(csvText);
   if (rows.length < 2) {
-    throw new Error("A planilha não retornou dados.");
+    throw new Error("O arquivo de dados não contém linhas. Verifique src/data/os-base.csv.");
   }
+
 
   const header = rows[0]!.map((h) => h.trim().toUpperCase());
   const idx = (name: string) => header.indexOf(name);
