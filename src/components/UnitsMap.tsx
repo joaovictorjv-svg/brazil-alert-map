@@ -85,7 +85,7 @@ export default function UnitsMap({ units, selected, onSelect, statesGeoJson }: U
             <br />
             {unit.grupo}
             <br />
-            Backlog: {formatPct(unit.backlogPct)} · {formatInt(unit.totalChamados)} chamados totais
+            Backlog: {formatPct(unit.backlogPct)} · {formatInt(unit.totalChamados)} Chamados Totais
           </Popup>
         </Marker>
       ))}
