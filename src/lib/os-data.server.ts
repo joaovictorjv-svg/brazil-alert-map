@@ -4,42 +4,36 @@ import { levelFromPct, type OsSnapshot, type OsUnit } from "./os-data";
 // O programa aceita CSV (padrão) ou XLSX. Se ambos existirem, o CSV tem prioridade.
 // Para atualizar os dados mensalmente, basta substituir src/data/os-base.csv
 // (ou src/data/os-base.xlsx) e republicar o app.
-const csvFiles = import.meta.glob("../data/os-base.csv", { as: "raw", eager: true });
-const xlsxFiles = import.meta.glob("../data/os-base.xlsx", { as: "url", eager: true });
-
 async function loadSourceRows(): Promise<string[][]> {
-  const csvKeys = Object.keys(csvFiles);
-  if (csvKeys.length > 0) {
-    const text = csvFiles[csvKeys[0]!] as string;
-    return parseCsv(text);
+  try {
+    const csv = await import("../data/os-base.csv?raw");
+    return parseCsv(csv.default as string);
+  } catch {
+    try {
+      const xlsxUrl = await import("../data/os-base.xlsx?url");
+      const response = await fetch(xlsxUrl.default as string);
+      if (!response.ok) {
+        throw new Error(`Não foi possível ler o arquivo XLSX (HTTP ${response.status}).`);
+      }
+      const buffer = await response.arrayBuffer();
+      const xlsx = await import("xlsx");
+      const workbook = xlsx.read(new Uint8Array(buffer), { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      if (!sheetName) {
+        throw new Error("O arquivo XLSX não possui nenhuma aba.");
+      }
+      const sheet = workbook.Sheets[sheetName];
+      if (!sheet) {
+        throw new Error("Não foi possível ler a aba da planilha XLSX.");
+      }
+      const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 }) as (string | number | null | undefined)[][];
+      return rows.map((row) => row.map((cell) => (cell == null ? "" : String(cell))));
+    } catch {
+      throw new Error(
+        "Nenhum arquivo de dados encontrado. Adicione src/data/os-base.csv ou src/data/os-base.xlsx.",
+      );
+    }
   }
-
-  const xlsxKeys = Object.keys(xlsxFiles);
-  if (xlsxKeys.length > 0) {
-    const url = xlsxFiles[xlsxKeys[0]!] as string;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Não foi possível ler o arquivo XLSX (HTTP ${response.status}).`);
-    }
-    const buffer = await response.arrayBuffer();
-    const xlsx = await import("xlsx");
-    const workbook = xlsx.read(new Uint8Array(buffer), { type: "array" });
-    const sheetName = workbook.SheetNames[0];
-    if (!sheetName) {
-      throw new Error("O arquivo XLSX não possui nenhuma aba.");
-    }
-    const sheet = workbook.Sheets[sheetName];
-    if (!sheet) {
-      throw new Error("Não foi possível ler a aba da planilha XLSX.");
-    }
-    const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 }) as (string | number | null | undefined)[][];
-
-    return rows.map((row) => row.map((cell) => (cell == null ? "" : String(cell))));
-  }
-
-  throw new Error(
-    "Nenhum arquivo de dados encontrado. Adicione src/data/os-base.csv ou src/data/os-base.xlsx.",
-  );
 }
 
 function parseCsv(text: string): string[][] {
