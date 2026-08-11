@@ -319,7 +319,7 @@ function DashboardPage() {
         </div>
       </div>
 
-      <Dialog open={selected !== null} onOpenChange={(open) => !open && setSelected(null)}>
+      {/* <Dialog open={selected !== null} onOpenChange={(open) => !open && setSelected(null)}>
         <DialogContent className="max-w-lg">
           {selected ? (
             <>
@@ -353,7 +353,7 @@ function DashboardPage() {
             </>
           ) : null}
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
