@@ -357,7 +357,7 @@ function DashboardPage() {
 
       {selected && (
         <div
-          className="fixed inset-0 z-30 bg-black/40 transition-opacity animate-in fade-in-0"
+          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[2px] transition-opacity animate-in fade-in-0"
           onClick={() => setSelected(null)}
         />
       )}
