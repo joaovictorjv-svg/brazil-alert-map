@@ -64,12 +64,22 @@ export default function UnitsMap({ units, selected, onSelect, statesGeoJson }: U
       {statesGeoJson ? (
         <GeoJSON
           data={statesGeoJson as never}
+          filter={(feature) => {
+            const p = feature.properties || {};
+            const uf = (p.sigla || p.UF || p.id || p.name || p.nome || "").toString().toUpperCase();
+            return (
+              uf.includes("SP") ||
+              uf.includes("RJ") ||
+              uf.includes("SÃO PAULO") ||
+              uf.includes("RIO DE JANEIRO")
+            );
+          }}
           style={() => ({
             color: "#1f4b5f",
-            weight: 1,
-            opacity: 0.6,
+            weight: 2,
+            opacity: 0.8,
             fillColor: "#2c6a80",
-            fillOpacity: 0.05,
+            fillOpacity: 0.12,
           })}
         />
       ) : null}
