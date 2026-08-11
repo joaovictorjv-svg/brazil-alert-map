@@ -101,6 +101,7 @@ function StatCard({
       <Tooltip>
         <TooltipTrigger asChild>{cardContent}</TooltipTrigger>
         <TooltipContent>
+          <TooltipContent className="bg-white text-zinc-900 border border-border shadow-md">
           <p className="text-xs">{tooltip}</p>
         </TooltipContent>
       </Tooltip>
