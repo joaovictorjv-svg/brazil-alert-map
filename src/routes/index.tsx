@@ -210,11 +210,11 @@ const toggleNivel = (lv: AlertLevel) => {
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <StatCard label="Unidades" value={formatInt(stats.unidades)} icon={Building2} />
           <StatCard
-            label="Chamados da rede"
+            label="OS's Encontradas"
             value={formatInt(stats.totalChamados)}
             icon={Ticket}
           />
-          <StatCard label="Backlog aberto" value={formatInt(stats.totalAbertas)} icon={Layers} />
+          <StatCard label="Backlog" value={formatInt(stats.totalAbertas)} icon={Layers} />
           <StatCard
             label="Alerta vermelho"
             value={formatInt(stats.criticas)}
