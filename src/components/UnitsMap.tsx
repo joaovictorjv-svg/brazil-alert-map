@@ -85,6 +85,10 @@ export default function UnitsMap({ units, selected, onSelect, statesGeoJson }: U
             <br />
             {unit.grupo}
             <br />
+            <span className="text-muted-foreground">
+            Quadro Fixo: {unit.quadroFixo ? "Sim" : "Não"}
+            </span>
+            <br />
             Backlog: {formatPct(unit.backlogPct)} · {formatInt(unit.totalChamados)} Chamados Totais
           </Popup>
         </Marker>
