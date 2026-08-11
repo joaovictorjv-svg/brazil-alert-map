@@ -117,11 +117,23 @@ function DashboardPage() {
   });
 
   const [statesGeoJson, setStatesGeoJson] = useState<unknown>(null);
-  const [grupo, setGrupo] = useState<string>("todos");
-  const [nivel, setNivel] = useState<AlertLevel | "todos">("todos");
+  const [gruposSelecionados, setGruposSelecionados] = useState<string[]>([]);
+  const [niveisSelecionados, setNiveisSelecionados] = useState<AlertLevel[]>([]);
   const [quadro, setQuadro] = useState<"todos" | "sim" | "nao">("todos");
   const [busca, setBusca] = useState("");
   const [selected, setSelected] = useState<OsUnit | null>(null);
+
+  const toggleGrupo = (g: string) => {
+  setGruposSelecionados((prev) =>
+    prev.includes(g) ? prev.filter((item) => item !== g) : [...prev, g]
+  );
+};
+
+const toggleNivel = (lv: AlertLevel) => {
+  setNiveisSelecionados((prev) =>
+    prev.includes(lv) ? prev.filter((item) => item !== lv) : [...prev, lv]
+  );
+};
 
   useEffect(() => {
     let cancelled = false;
@@ -144,14 +156,14 @@ function DashboardPage() {
   );
 
   const filtered = useMemo(() => {
-    const term = busca.trim().toLowerCase();
-    return units
-      .filter((u) => (grupo === "todos" ? true : u.grupo === grupo))
-      .filter((u) => (nivel === "todos" ? true : u.nivel === nivel))
-      .filter((u) => (quadro === "todos" ? true : quadro === "sim" ? u.quadroFixo : !u.quadroFixo))
-      .filter((u) => (term ? u.nome.toLowerCase().includes(term) : true))
-      .sort((a, b) => b.backlogPct - a.backlogPct);
-  }, [units, grupo, nivel, quadro, busca]);
+  const term = busca.trim().toLowerCase();
+  return units
+    .filter((u) => (gruposSelecionados.length === 0 ? true : gruposSelecionados.includes(u.grupo)))
+    .filter((u) => (niveisSelecionados.length === 0 ? true : niveisSelecionados.includes(u.nivel)))
+    .filter((u) => (quadro === "todos" ? true : quadro === "sim" ? u.quadroFixo : !u.quadroFixo))
+    .filter((u) => (term ? u.nome.toLowerCase().includes(term) : true))
+    .sort((a, b) => b.backlogPct - a.backlogPct);
+}, [units, gruposSelecionados, niveisSelecionados, quadro, busca]);
 
   const stats = useMemo(() => {
     const totalChamados = filtered.reduce((acc, u) => acc + u.totalChamados, 0);
@@ -223,54 +235,62 @@ function DashboardPage() {
               />
             </div>
 
-            <div className="flex flex-wrap gap-1.5">
-              <button
-                onClick={() => setGrupo("todos")}
-                className={cn(
-                  "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
-                  grupo === "todos" ? "bg-primary text-primary-foreground" : "hover:bg-muted",
-                )}
-              >
-                Todos os grupos
-              </button>
-              {grupos.map((g) => (
-                <button
-                  key={g}
-                  onClick={() => setGrupo(g)}
-                  className={cn(
-                    "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
-                    grupo === g ? "bg-primary text-primary-foreground" : "hover:bg-muted",
-                  )}
-                >
-                  {g}
-                </button>
-              ))}
-            </div>
+            {/* Filtro de Grupos */}
+<div className="flex flex-wrap gap-1.5">
+  <button
+    onClick={() => setGruposSelecionados([])}
+    className={cn(
+      "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
+      gruposSelecionados.length === 0 ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+    )}
+  >
+    Todos os grupos
+  </button>
+  {grupos.map((g) => {
+    const ativo = gruposSelecionados.includes(g);
+    return (
+      <button
+        key={g}
+        onClick={() => toggleGrupo(g)}
+        className={cn(
+          "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
+          ativo ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+        )}
+      >
+        {g}
+      </button>
+    );
+  })}
+</div>
 
-            <div className="flex flex-wrap gap-1.5">
-              <button
-                onClick={() => setNivel("todos")}
-                className={cn(
-                  "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
-                  nivel === "todos" ? "bg-primary text-primary-foreground" : "hover:bg-muted",
-                )}
-              >
-                Todas as criticidades
-              </button>
-              {LEVELS.map((lv) => (
-                <button
-                  key={lv}
-                  onClick={() => setNivel(lv)}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
-                    nivel === lv ? "bg-primary text-primary-foreground" : "hover:bg-muted",
-                  )}
-                >
-                  <LevelDot level={lv} />
-                  {LEVEL_LABEL[lv]}
-                </button>
-              ))}
-            </div>
+{/* Filtro de Criticidades */}
+<div className="flex flex-wrap gap-1.5">
+  <button
+    onClick={() => setNiveisSelecionados([])}
+    className={cn(
+      "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
+      niveisSelecionados.length === 0 ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+    )}
+  >
+    Todas as criticidades
+  </button>
+  {LEVELS.map((lv) => {
+    const ativo = niveisSelecionados.includes(lv);
+    return (
+      <button
+        key={lv}
+        onClick={() => toggleNivel(lv)}
+        className={cn(
+          "flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
+          ativo ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+        )}
+      >
+        <LevelDot level={lv} />
+        {LEVEL_LABEL[lv]}
+      </button>
+    );
+  })}
+</div>
             <div className="flex flex-wrap gap-1.5">
               {(
                 [
