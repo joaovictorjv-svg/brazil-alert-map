@@ -119,6 +119,7 @@ function DashboardPage() {
   const [statesGeoJson, setStatesGeoJson] = useState<unknown>(null);
   const [grupo, setGrupo] = useState<string>("todos");
   const [nivel, setNivel] = useState<AlertLevel | "todos">("todos");
+  const [quadro, setQuadro] = useState<"todos" | "sim" | "nao">("todos");
   const [busca, setBusca] = useState("");
   const [selected, setSelected] = useState<OsUnit | null>(null);
 
