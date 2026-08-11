@@ -52,7 +52,7 @@ export default function UnitsMap({ units, selected, onSelect, statesGeoJson }: U
   return (
     <div className="relative h-full w-full">
       {/* Legenda de Criticidade Flutuante */}
-      <div className="absolute bottom-4 right-4 z-[1000] rounded-md border border-border bg-white/95 p-3 shadow-lg backdrop-blur-sm pointer-events-auto max-w-[260px]">
+      <div className="absolute bottom-12 right-4 z-[1000] rounded-md border border-border bg-white/95 p-3 shadow-lg backdrop-blur-sm pointer-events-auto max-w-[260px]">
         <h4 className="mb-2 text-xs font-semibold text-zinc-900">Legenda de Criticidade</h4>
         <div className="flex flex-col gap-2 text-xs text-zinc-700">
           <div className="flex items-center gap-2">
