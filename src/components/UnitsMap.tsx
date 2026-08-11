@@ -31,7 +31,7 @@ function FitBounds({ units, selected }: { units: OsUnit[]; selected: OsUnit | nu
     if (points.length === 0) return;
 
     map.fitBounds(L.latLngBounds(points).pad(0.25), { animate: false });
-  }, [map, units]); // 'selected' foi removido daqui
+  }, [map, units]);
 
   return null;
 }
@@ -86,7 +86,6 @@ export default function UnitsMap({ units, selected, onSelect, statesGeoJson }: U
             {unit.grupo}
             <br />
             Quadro Fixo: {unit.quadroFixo ? "Sim" : "Não"}
-            </span>
             <br />
             Backlog: {formatPct(unit.backlogPct)} · {formatInt(unit.totalChamados)} Chamados Totais
           </Popup>
