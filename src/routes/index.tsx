@@ -201,7 +201,7 @@ const toggleNivel = (lv: AlertLevel) => {
         <div className="mx-auto flex max-w-[1600px] flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="font-display text-xl font-semibold tracking-tight md:text-2xl">
-              Painel de Ordens de Serviço — Manutenção
+              Painel de Ordens de Serviço — Manutenção (1° Semestre / 2026)
             </h1>
             <p className="text-xs text-primary-foreground/70">
               Última atualização: {atualizadoEm}
