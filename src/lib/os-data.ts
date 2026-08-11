@@ -5,6 +5,7 @@ export interface OsUnit {
   nome: string;
   grupo: string;
   condicao: string;
+  quadroFixo: boolean;
   lat: number | null;
   lng: number | null;
   reqParadas: number;
