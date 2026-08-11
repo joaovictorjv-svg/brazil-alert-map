@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-
 import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
