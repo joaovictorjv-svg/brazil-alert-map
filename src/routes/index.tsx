@@ -4,7 +4,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { ClientOnly } from "@tanstack/react-router";
 import { AlertTriangle, Building2, Layers, RefreshCw, Search, Ticket } from "lucide-react";
 import { Suspense, lazy, useEffect, useMemo, useState } from "react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +23,12 @@ import {
 } from "@/lib/os-data";
 import { getOsSnapshot } from "@/lib/os-data.functions";
 import { cn } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const UnitsMap = lazy(() => import("@/components/UnitsMap"));
 
