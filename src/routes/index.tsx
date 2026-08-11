@@ -147,9 +147,10 @@ function DashboardPage() {
     return units
       .filter((u) => (grupo === "todos" ? true : u.grupo === grupo))
       .filter((u) => (nivel === "todos" ? true : u.nivel === nivel))
+      .filter((u) => (quadro === "todos" ? true : quadro === "sim" ? u.quadroFixo : !u.quadroFixo))
       .filter((u) => (term ? u.nome.toLowerCase().includes(term) : true))
       .sort((a, b) => b.backlogPct - a.backlogPct);
-  }, [units, grupo, nivel, busca]);
+  }, [units, grupo, nivel, quadro, busca]);
 
   const stats = useMemo(() => {
     const totalChamados = filtered.reduce((acc, u) => acc + u.totalChamados, 0);
@@ -269,7 +270,28 @@ function DashboardPage() {
                 </button>
               ))}
             </div>
+            <div className="flex flex-wrap gap-1.5">
+              {(
+                [
+                  ["todos", "Todos os quadros"],
+                  ["sim", "Com quadro fixo"],
+                  ["nao", "Sem quadro fixo"],
+                ] as const
+              ).map(([value, label]) => (
+                <button
+                  key={value}
+                  onClick={() => setQuadro(value)}
+                  className={cn(
+                    "rounded-full border border-border px-2.5 py-1 text-xs transition-colors",
+                    quadro === value ? "bg-primary text-primary-foreground" : "hover:bg-muted",
+                  )}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
 
+            
             <div className="max-h-[calc(100vh-24rem)] min-h-64 overflow-y-auto rounded-md border border-border">
               {filtered.length === 0 ? (
                 <p className="p-4 text-sm text-muted-foreground">
