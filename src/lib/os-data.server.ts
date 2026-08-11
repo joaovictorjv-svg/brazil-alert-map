@@ -143,6 +143,11 @@ export async function fetchOsSnapshot(): Promise<OsSnapshot> {
       nome,
       grupo: (row[col.grupo] ?? "").trim() || "Sem grupo",
       condicao: (row[col.condicao] ?? "").trim(),
+      quadroFixo: (row[col.quadroFixo] ?? "")
+        .trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase() === "SIM",
       lat,
       lng,
       reqParadas: toNumber(row[col.reqParadas]),
