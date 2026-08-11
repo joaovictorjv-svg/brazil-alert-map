@@ -110,6 +110,7 @@ export async function fetchOsSnapshot(): Promise<OsSnapshot> {
   const col = {
     unidade: idx("UNIDADE"),
     grupo: idx("GRUPO"),
+    quadroFixo: idx("QUADRO_FIXO"),
     coords: idx("COORDENADAS"),
     reqParadas: idx("REQ_PARADAS"),
     abertasUnidade: idx("ABERTAS_UNIDADES"),
